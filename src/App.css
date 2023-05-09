@@ -1,0 +1,28 @@
+/* .formDatePicker{
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 66px;
+  left: 570px;
+  } */
+
+  * {
+    font-family: 'Roboto';
+    /* outline: 1px red dashed; */
+  }
+  .form input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    width: 20px;
+    height: 20px;
+  }
+
+  input[type="datetime-local"]::-webkit-datetime-edit {
+    display:none;
+  }
+
+  /* input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url(../../calendar.svg);
+    background-color: transparent;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  } */
