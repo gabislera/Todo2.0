@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { BsPlusLg } from 'react-icons/bs'
 import { UserContext } from '../../UserContext'
 
-const Todo = ({ description, checked, todo }) => {
+const Todo = ({ description, checked, todo, isActive, handleTodoClick }) => {
   const { updateChecked, setCurrentTodo } = useContext(UserContext)
 
   const handleChecked = () => {
@@ -12,17 +12,18 @@ const Todo = ({ description, checked, todo }) => {
   const handleClick = () => {
     console.log('mostrar a Todo selecionada:', description)
     setCurrentTodo(todo)
+    handleTodoClick(todo.id)
   }
 
   return (
-    <div className='bg-primary h-11 flex justify-between items-center rounded-sm text-secondary p-2 m-2 '>
+    <div onClick={handleClick} className={`bg-primary h-11 flex justify-between items-center rounded-sm text-secondary p-2 m-2 ${isActive ? 'outline-dashed outline-slate-700' : ''}`}>
       <div className='flex items-center gap-2'>
         <label htmlFor="checkbox"></label>
         <input type="checkbox" id='checkbox' checked={checked} onChange={handleChecked} />
         <div className={checked ? 'capitalize line-through opacity-50' : 'capitalize'}>{description}</div>
       </div>
       <div>
-        <BsPlusLg className='cursor-pointer hover:text-action' onClick={handleClick} size={15} />
+        <BsPlusLg className='cursor-pointer hover:text-action' size={15} />
       </div>
     </div>
   )

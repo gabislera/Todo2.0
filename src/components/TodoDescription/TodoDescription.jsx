@@ -10,16 +10,12 @@ const TodoDescription = () => {
 
   if (currentTodo)
     return (
-      <div className='h-40 bg-secondary rounded-lg'>
-        <div className='flex justify-between'>
-          <div>
-            <h1>Descrição detalhada da tarefa:</h1>
-            {currentTodo.description}
-            <p>outline na todo clicada</p>
-            <p>seleção de hora</p>
-          </div>
-          <button onClick={handleDelete} className='bg-action rounded w-max py-1 px-4  text-white'>Excluir Tarefa</button>
+      <div className='h-max bg-secondary rounded-lg p-3 flex flex-col gap-5'>
+        <div>
+          <h1 className='text-xl'>Detalhes:</h1>
+          {currentTodo.description}
         </div>
+        <button onClick={handleDelete} className='bg-action rounded w-max py-1 px-4  text-white'>Excluir Tarefa</button>
       </div>
     )
 }

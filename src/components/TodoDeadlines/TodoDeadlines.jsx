@@ -39,33 +39,10 @@ const TodoDate = () => {
             <h1 className='text-xl'>Prazos</h1>
             <BiEdit className='cursor-pointer' onClick={handleEdit} />
           </div>
-
-          {/* TRANSFORMAR EM COMPONENTES */}
           <div className='flex gap-10 items-center mt-4'>
-            {/* <Child currentTodo={currentTodo} /> */}
-            <div>
-              <h1 className='text-xs'>Hora da tarefa</h1>
-              <div className='flex gap-2 mt-1'>
-                {currentTodo && <AiOutlineClockCircle size={22} />}
-                <p>{currentTodo ? time : '--'}</p>
-              </div>
-            </div>
-            <div>
-              <h1 className='text-xs'>Data da tarefa</h1>
-              <div className='flex gap-2 mt-1'>
-                {currentTodo && <MdOutlineCalendarToday size={22} />}
-                <p>{currentTodo ? fullDate : '--'}</p>
-                {/* <MdOutlineCalendarToday size={22} />
-                {currentTodo ? fullDate : 'Selecione uma tarefa'} */}
-              </div>
-            </div>
-            <div>
-              <h1 className='text-xs mt-1'>Prioridade</h1>
-              <div className='flex gap-2 mt-1'>
-                {currentTodo && <BsExclamationDiamondFill fill={color} stroke={color} size={22} />}
-                <p className='capitalize'>{currentTodo ? currentTodo.priority : '--'}</p>
-              </div>
-            </div>
+            <Child currentTodo={currentTodo} deadline={time} description='Hora Da Tarefa' icon={<AiOutlineClockCircle size={22} />} />
+            <Child currentTodo={currentTodo} deadline={fullDate} description='Dia Da Tarefa' icon={<MdOutlineCalendarToday size={22} />} />
+            <Child currentTodo={currentTodo} deadline={currentTodo.priority} description='Prioridade' icon={<BsExclamationDiamondFill fill={color} stroke={color} size={22} />} />
           </div>
           {viewEdit && <DeadlineEdit />}
         </div>
