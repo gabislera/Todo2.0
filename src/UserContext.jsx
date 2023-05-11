@@ -13,9 +13,9 @@ export const UserContext = createContext()
 
 export const UserStorage = ({ children }) => {
   const [todos, setTodos] = useState([])
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(1)
   const [currentTodo, setCurrentTodo] = useState('')
-
+  const [activeTodoId, setActiveTodoId] = useState(null)
 
   const addTodo = (todo) => {
     setTodos((prevTodo) => {
@@ -24,6 +24,7 @@ export const UserStorage = ({ children }) => {
       }
       return [...prevTodo, todoAux]
     })
+    setCurrentTodo(undefined)
     setId(id + 1)
   }
 
@@ -61,7 +62,7 @@ export const UserStorage = ({ children }) => {
   // }, [addTodo])
 
   return (
-    <UserContext.Provider value={{ addTodo, todos, updateChecked, setCurrentTodo, currentTodo, deleteTodo, editTodo }}>
+    <UserContext.Provider value={{ addTodo, todos, updateChecked, setCurrentTodo, currentTodo, deleteTodo, editTodo, activeTodoId, setActiveTodoId }}>
       {children}
     </UserContext.Provider>
   )

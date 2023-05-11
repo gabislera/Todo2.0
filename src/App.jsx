@@ -9,7 +9,7 @@ function App() {
   return (
     <div className=' bg-primary h-screen' >
       <UserStorage>
-        <div className='grid grid-cols-2 max-w-screen-lg m-auto gap-5 pt-10 '>
+        <div className='p-5 grid grid-cols-1 max-w-screen-lg m-auto gap-5 pt-10 lg:grid-cols-2'>
           <TotalTodoInfo />
           <TodoDate />
           <Todos />

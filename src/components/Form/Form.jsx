@@ -1,18 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import DateInput from './DateInput'
 import SelectInput from './SelectInput'
 import TextAreaInput from './TextAreaInput'
 import TaskInput from './TaskInput'
-import { useTodoList } from '../../hooks/useTodoList'
 
 const todayDate = new Date()
 
-const Form = ({ onCloseModal }) => {
-  const { addTodo, currentTodo, editTodo, setCurrentTodo } = useTodoList()
+const Form = ({ buttonText, onSubmit, currentTodo }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [dateValue, setDateValue] = useState(todayDate)
   const [priority, setPriority] = useState('baixa')
+
+  const resetState = () => {
+    setTitle('')
+    setDescription('')
+    setPriority('baixa')
+    setDateValue(todayDate)
+  }
 
   useEffect(() => {
     if (currentTodo) {
@@ -50,16 +55,8 @@ const Form = ({ onCloseModal }) => {
       description,
       checked: false
     }
-    if (currentTodo) {
-      editTodo({
-        ...todoData,
-        id: currentTodo.id
-      })
-      setCurrentTodo('')
-    } else {
-      addTodo(todoData)
-    }
-    onCloseModal()
+    onSubmit(todoData)
+    resetState()
   }
 
   return (
@@ -72,7 +69,7 @@ const Form = ({ onCloseModal }) => {
           <div className='flex justify-between gap-8'>
             <SelectInput value={priority} onChange={handleDropDown} />
             <DateInput value={dateValue} onChange={handleDate} />
-            <button className='bg-action rounded w-max py-1 px-4 mt-5 text-white'>Adicionar</button>
+            <button className='bg-action rounded w-max py-1 px-4 mt-5 text-white'>{buttonText}</button>
           </div>
         </form>
       </div>

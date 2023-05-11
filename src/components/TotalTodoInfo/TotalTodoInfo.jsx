@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../../UserContext'
+import { useState } from 'react'
 import Modal from '../Modal/Modal'
+import { useTodoList } from '../../hooks/useTodoList'
 
 const TotalTodoInfo = () => {
-  const { todos } = useContext(UserContext)
+  const { todos } = useTodoList()
   const [showModal, setShowModal] = useState(false)
   const checkedTotos = todos.filter((todo) => todo.checked)
 

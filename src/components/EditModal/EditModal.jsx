@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Form from '../Form/Form'
 import { useTodoList } from '../../hooks/useTodoList'
 
-const Modal = ({ showModal, onCloseModal }) => {
-  const { addTodo } = useTodoList()
+const EditModal = ({ showModal, onCloseModal }) => {
+  const { editTodo, currentTodo } = useTodoList()
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -14,8 +14,10 @@ const Modal = ({ showModal, onCloseModal }) => {
   }, [onCloseModal])
 
   const onSubmit = (todoData) => {
-
-    addTodo(todoData)
+    editTodo({
+      ...todoData,
+      id: currentTodo.id
+    })
     onCloseModal()
   }
 
@@ -25,12 +27,14 @@ const Modal = ({ showModal, onCloseModal }) => {
       <div className='w-max h-max rounded-xl bg-white absolute top-1/4 left-1/2 -translate-x-2/4 shadow-xl'>
         <Form
           onCloseModal={onCloseModal}
-          buttonText='Adicionar'
-          onSubmit={onSubmit} />
+          buttonText='Editar'
+          onSubmit={onSubmit}
+          currentTodo={currentTodo}
+        />
       </div>
       <div className='w-screen h-screen' onClick={onCloseModal}></div>
     </div>
   )
 }
 
-export default Modal
+export default EditModal

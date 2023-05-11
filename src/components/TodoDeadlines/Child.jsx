@@ -1,6 +1,9 @@
 import React from 'react'
+import { useTodoList } from '../../hooks/useTodoList'
 
 const Child = ({ currentTodo, description, icon, deadline }) => {
+  const { activeId } = useTodoList()
+
   return (
     <div>
       <h1 className='text-xs'>{description}</h1>

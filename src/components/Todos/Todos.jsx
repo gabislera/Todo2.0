@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Todo from '../Todo/Todo'
-import { UserContext } from '../../UserContext'
+import { useTodoList } from '../../hooks/useTodoList'
 
 const checkedSort = (todo) => todo.checked ? 1 : -1
 
 const Todos = () => {
-  const { todos } = useContext(UserContext)
-  const [activeTodoId, setActiveTodoId] = useState()
+  const { todos, activeTodoId, setActiveTodoId } = useTodoList()
+  const todoRef = useRef()
 
   const sortedTodos = [
     ...todos.filter((todo) => !todo.checked).sort(checkedSort),
@@ -17,8 +17,21 @@ const Todos = () => {
     setActiveTodoId(id)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (todoRef.current && !todoRef.current.contains(event.target)) {
+        setActiveTodoId(null)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className='h-max bg-secondary rounded-lg'>
+    <div className='h-max bg-secondary rounded-lg' ref={todoRef}>
       {sortedTodos.map(todo =>
         <Todo
           key={todo.id}
