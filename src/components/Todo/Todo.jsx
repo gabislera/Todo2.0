@@ -10,13 +10,13 @@ const Todo = ({ description, checked, todo, isActive, handleTodoClick }) => {
   }
 
   const handleClick = () => {
-    console.log('mostrar a Todo selecionada:', description)
+    // console.log('mostrar a Todo selecionada:', description)
     setCurrentTodo(todo)
     handleTodoClick(todo.id)
   }
 
   return (
-    <div onClick={handleClick} className={`bg-primary h-11 flex justify-between items-center rounded-sm text-secondary p-2 m-2 ${isActive ? 'outline-dashed outline-slate-700' : ''}`}>
+    <div onClick={handleClick} className={`bg-primary h-11 flex justify-between items-center rounded-sm text-secondary p-2 m-2 ${isActive ? 'scale-95' : ''} transition-all`}>
       <div className='flex items-center gap-2'>
         <label htmlFor="checkbox"></label>
         <input type="checkbox" id='checkbox' checked={checked} onChange={handleChecked} />

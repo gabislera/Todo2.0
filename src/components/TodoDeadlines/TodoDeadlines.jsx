@@ -17,7 +17,7 @@ const TodoDate = () => {
   const [viewEdit, setViewEdit] = useState(false)
   const { currentTodo, todos } = useContext(UserContext)
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
-  const date = new Date(currentTodo.date)
+  const date = new Date(currentTodo.dateValue)
   const fullDate = date.toLocaleDateString('pt-BR', options)
   const time = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
   const color = PRIORITY_COLOR[currentTodo.priority]
@@ -25,6 +25,10 @@ const TodoDate = () => {
   const handleEdit = () => {
     setViewEdit((prevState) => !prevState)
   }
+
+  // useEffect(() => {
+  //   console.log(currentTodo)
+  // }, [currentTodo])
 
   return (
     <div className='h-max bg-secondary rounded-lg p-3 flex flex-col gap-5'>

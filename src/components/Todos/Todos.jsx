@@ -22,7 +22,7 @@ const Todos = () => {
       {sortedTodos.map(todo =>
         <Todo
           key={todo.id}
-          description={todo.description}
+          description={todo.title}
           checked={todo.checked}
           todo={todo}
           isActive={activeTodoId === todo.id}

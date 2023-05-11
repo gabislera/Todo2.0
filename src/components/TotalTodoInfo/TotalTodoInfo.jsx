@@ -1,10 +1,15 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../UserContext'
+import Modal from '../Modal/Modal'
 
 const TotalTodoInfo = () => {
-  const { handleModal, todos } = useContext(UserContext)
-
+  const { todos } = useContext(UserContext)
+  const [showModal, setShowModal] = useState(false)
   const checkedTotos = todos.filter((todo) => todo.checked)
+
+  const handleModal = () => {
+    setShowModal((prevState) => !prevState)
+  }
 
   return (
     <div className=' bg-secondary rounded-lg p-3 flex flex-col gap-5'>
@@ -26,6 +31,7 @@ const TotalTodoInfo = () => {
         </div>
         <button onClick={handleModal} className='bg-action rounded w-max py-1 px-4  text-white'>Nova Tarefa</button>
       </div>
+      <Modal showModal={showModal} onCloseModal={handleModal} />
     </div>
   )
 }
