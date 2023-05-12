@@ -1,12 +1,7 @@
-import { useEffect } from 'react'
 import { useTodoList } from '../../hooks/useTodoList'
 
 const TodoDescription = () => {
   const { currentTodo, activeTodoId } = useTodoList()
-
-  useEffect(() => {
-    console.log(currentTodo, activeTodoId)
-  }, [currentTodo, activeTodoId])
 
   if (currentTodo && activeTodoId)
     return (

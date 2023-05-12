@@ -1,18 +1,21 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const UserContext = createContext()
 
-// const initialData = {
-//   title: '',
-//   description: '',
-//   id: '',
-//   checked: false,
-//   priority: '',
-//   date: ''
-// }
+const TODOS_STORAGE_KEY = "todos";
 
+const saveTodosToLocalStorage = (teste) => {
+  localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(teste));
+}
+
+const getTodos = () => {
+  const result = localStorage.getItem(TODOS_STORAGE_KEY)
+  return JSON.parse(result) ?? []
+}
+
+const storageTodo = getTodos()
 export const UserStorage = ({ children }) => {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(storageTodo)
   const [id, setId] = useState(1)
   const [currentTodo, setCurrentTodo] = useState('')
   const [activeTodoId, setActiveTodoId] = useState(null)
@@ -22,7 +25,9 @@ export const UserStorage = ({ children }) => {
       const todoAux = {
         ...todo, id
       }
-      return [...prevTodo, todoAux]
+      const list = [...prevTodo, todoAux]
+      saveTodosToLocalStorage(list)
+      return list
     })
     setCurrentTodo(undefined)
     setId(id + 1)
@@ -37,6 +42,7 @@ export const UserStorage = ({ children }) => {
         }
       return _todo
     })
+    saveTodosToLocalStorage(editedTodo)
     setTodos(editedTodo)
   }
 
@@ -49,20 +55,28 @@ export const UserStorage = ({ children }) => {
         }
       return _todo
     })
+    saveTodosToLocalStorage(checkedTodo)
     setTodos(checkedTodo)
   }
 
   const deleteTodo = (todo) => {
     const filteredTodo = todos.filter(({ id }) => id !== todo.id)
+    saveTodosToLocalStorage(filteredTodo)
     setTodos(filteredTodo)
   }
 
-  // useEffect(() => {
-  //   console.log(todos)
-  // }, [addTodo])
-
   return (
-    <UserContext.Provider value={{ addTodo, todos, updateChecked, setCurrentTodo, currentTodo, deleteTodo, editTodo, activeTodoId, setActiveTodoId }}>
+    <UserContext.Provider value={{
+      addTodo,
+      todos,
+      updateChecked,
+      setCurrentTodo,
+      currentTodo,
+      deleteTodo,
+      editTodo,
+      activeTodoId,
+      setActiveTodoId
+    }}>
       {children}
     </UserContext.Provider>
   )

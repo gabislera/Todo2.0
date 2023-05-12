@@ -31,7 +31,7 @@ const Todos = () => {
   }, [])
 
   return (
-    <div className='h-max bg-secondary rounded-lg' ref={todoRef}>
+    <div className='h-max bg-secondary rounded-lg ' ref={todoRef}>
       {sortedTodos.map(todo =>
         <Todo
           key={todo.id}

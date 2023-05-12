@@ -14,7 +14,6 @@ const Modal = ({ showModal, onCloseModal }) => {
   }, [onCloseModal])
 
   const onSubmit = (todoData) => {
-
     addTodo(todoData)
     onCloseModal()
   }
@@ -22,14 +21,14 @@ const Modal = ({ showModal, onCloseModal }) => {
   if (!showModal) return <></>
   return (
     <div className="flex w-screen h-screen absolute bg-black/40 top-0 left-0 z-[1] overflow-hidden">
-      <div className='w-max h-max rounded-xl bg-white absolute top-1/4 left-1/2 -translate-x-2/4 shadow-xl'>
+      <div className='w-96 h-max rounded-xl bg-white absolute top-28 left-1/2 -translate-x-2/4 shadow-xl lg:w-max'>
         <Form
           onCloseModal={onCloseModal}
           buttonText='Adicionar'
           onSubmit={onSubmit} />
       </div>
       <div className='w-screen h-screen' onClick={onCloseModal}></div>
-    </div>
+    </div >
   )
 }
 

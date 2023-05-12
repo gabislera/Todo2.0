@@ -20,7 +20,7 @@ const TodoDate = () => {
   const color = PRIORITY_COLOR[currentTodo?.priority]
 
   return (
-    <div className='h-max bg-secondary rounded-lg p-3 flex flex-col gap-5'>
+    <div className='h-max order-last bg-secondary rounded-lg p-3 flex flex-col gap-5 lg:order-none'>
       {!todos.length ?
         <div>
           <h1 className='text-xl'>Você ainda não possui tarefas criadas</h1>
@@ -31,9 +31,11 @@ const TodoDate = () => {
           <div className='flex items-center justify-between'>
             <h1 className='text-xl'>Prazos</h1>
           </div>
-          <div className='flex gap-10 items-center mt-4'>
-            <Child currentTodo={currentTodo} deadline={time} description='Hora Da Tarefa' icon={<AiOutlineClockCircle size={22} />} />
-            <Child currentTodo={currentTodo} deadline={fullDate} description='Dia Da Tarefa' icon={<MdOutlineCalendarToday size={22} />} />
+          <div className='flex gap-10 mt-4'>
+            <div className='flex flex-col gap-2 lg:flex-row lg:gap-14'>
+              <Child currentTodo={currentTodo} deadline={time} description='Hora Da Tarefa' icon={<AiOutlineClockCircle size={22} />} />
+              <Child currentTodo={currentTodo} deadline={fullDate} description='Dia Da Tarefa' icon={<MdOutlineCalendarToday size={22} />} />
+            </div>
             <Child currentTodo={currentTodo} deadline={currentTodo?.priority} description='Prioridade' icon={<BsExclamationDiamondFill fill={color} stroke={color} size={22} />} />
           </div>
         </div>

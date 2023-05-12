@@ -30,17 +30,19 @@ const Todo = ({ description, checked, todo, isActive, handleTodoClick }) => {
 
   return (
     <>
-      <div className={`bg-primary h-11 flex justify-between items-center rounded-sm text-secondary p-2 m-2 ${isActive ? 'scale-95' : ''} transition-all`}>
+      <div className={`bg-primary h-11 flex justify-between items-center rounded-xl text-secondary p-2 m-2 ${isActive ? 'scale-95' : ''} transition-all`}>
         <div className='flex items-center gap-2'>
           <label htmlFor="checkbox"></label>
           <input type="checkbox" id='checkbox' checked={checked} onChange={handleChecked} />
           <div className={checked ? 'capitalize line-through opacity-50' : 'capitalize'}>{description}</div>
         </div>
         <span onClick={handleClick} className='h-full flex-1'></span>
+
         <div className='flex gap-1'>
-          <BiEdit onClick={handleModal} size={18} className='cursor-pointer' />
-          <AiOutlineDelete onClick={handleDelete} size={18} className='cursor-pointer' />
+          <BiEdit onClick={handleModal} size={18} className={`cursor-pointer ${isActive ? '' : 'hidden'}`} />
+          <AiOutlineDelete onClick={handleDelete} size={18} className={`cursor-pointer ${isActive ? '' : 'hidden'}`} />
         </div>
+
       </div>
       <EditModal showModal={showModal} onCloseModal={handleModal} />
     </>
